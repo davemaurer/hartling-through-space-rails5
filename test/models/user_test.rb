@@ -13,4 +13,9 @@ class UserTest < ActiveSupport::TestCase
     @user.name = ''
     refute @user.valid?
   end
+
+  test 'is invalid without an email' do
+    @user.email = ''
+    refute @user.valid?
+  end
 end
