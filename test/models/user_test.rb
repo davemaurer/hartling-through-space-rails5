@@ -18,4 +18,9 @@ class UserTest < ActiveSupport::TestCase
     @user.email = ''
     refute @user.valid?
   end
+
+  test 'name should not be too long' do
+    @user.name = 'x' * 51
+    refute @user.valid?
+  end
 end
