@@ -12,12 +12,12 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'is invalid without a name' do
-    @user.name = ''
+    @user.name = ' '
     refute @user.valid?
   end
 
   test 'is invalid without an email' do
-    @user.email = ''
+    @user.email = ' '
     refute @user.valid?
   end
 
@@ -61,5 +61,15 @@ class UserTest < ActiveSupport::TestCase
     @user.email = mixed_case_email
     @user.save
     assert_equal mixed_case_email.downcase, @user.reload.email
+  end
+
+  test 'is invalid without a password' do
+    @user.password = @user.password_confirmation = ' ' * 6
+    assert_not @user.valid?
+  end
+
+  test 'password should have a minimum length' do
+    @user.password = @user.password_confirmation = 'x' * 5
+    assert_not @user.valid?
   end
 end
