@@ -10,6 +10,9 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }
   has_secure_password
 
+  # User User.method_name instead of self.method_name to clarify that you are using referencing the
+  # User class, not an instance object, which is an instantiation of the User class.
+
   #retuns the hash digest of the given string
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
